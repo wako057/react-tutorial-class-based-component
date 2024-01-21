@@ -13,9 +13,14 @@ class UserFinder extends Component {
   constructor() {
     super();
     this.state = {
-      filteredUsers: DUMMY_USERS,
+      filteredUsers: [],
       searchTerm: ''
     };
+  }
+
+  componentDidMount() {
+    // send http request
+    this.setState({ filteredUsers: DUMMY_USERS });
   }
 
   searchChangeHandler(event) {
@@ -48,6 +53,7 @@ class UserFinder extends Component {
 //   const [filteredUsers, setFilteredUsers] = useState(DUMMY_USERS);
 //   const [searchTerm, setSearchTerm] = useState('');
 //
+//   useEffect( () => {setFilteredUsers = DUMMU_USERS}, []);
 //   useEffect(() => {
 //     setFilteredUsers(
 //       DUMMY_USERS.filter((user) => user.name.includes(searchTerm))
