@@ -2,6 +2,7 @@ import {Fragment, useState, useEffect, Component} from 'react';
 
 import Users from './Users';
 import classes from './UserFinder.module.css';
+import UsersContext from "./users-context";
 
 const DUMMY_USERS = [
   { id: 'u1', name: 'Max' },
@@ -10,6 +11,7 @@ const DUMMY_USERS = [
 ];
 
 class UserFinder extends Component {
+  static contextType = UsersContext;
   constructor() {
     super();
     this.state = {
@@ -20,7 +22,7 @@ class UserFinder extends Component {
 
   componentDidMount() {
     // send http request
-    this.setState({ filteredUsers: DUMMY_USERS });
+    this.setState({ filteredUsers: this.context.users });
   }
 
   searchChangeHandler(event) {
@@ -40,6 +42,9 @@ class UserFinder extends Component {
   render() {
     return (
       <Fragment>
+        <UsersContext.Provider>
+
+        </UsersContext.Provider>
         <div className={classes.finder}>
           <input type='search' onChange={this.searchChangeHandler.bind(this)} />
         </div>
